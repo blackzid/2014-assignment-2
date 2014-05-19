@@ -1,0 +1,19 @@
+CreateNode n1 5
+CreateNode n3 1
+CreateNode n4 2
+CreateNode n100 100
+CreateGraph A
+AddNode A n4
+CreateNode n2 3
+CreateGraph B
+AddNode B n1
+AddNode B n2
+ListNodes B
+AddNode B n3
+AddNode B n4
+ListNodes A
+AddEdge B n2 n1
+AddEdge B n2 n3
+AddEdge B n1 n4
+AddEdge B n3 n4
+ListChildren B n2

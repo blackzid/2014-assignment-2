@@ -55,7 +55,8 @@ public class PS3TestDriver {
 
     /** String -> Graph: maps the names of graphs to the actual graph **/
     //TODO for the student: Parameterize the next line correctly.
-    //private final Map<String, _______> graphs = new HashMap<String, ________>();
+    private final Map<String, Graph<WeightedNode>> graphs = new HashMap<String, Graph<WeightedNode>>();
+
     /** String -> WeightedNode: maps the names of nodes to the actual node **/
     private final Map<String, WeightedNode> nodes = new HashMap<String, WeightedNode>();
     private final PrintWriter output;
@@ -140,9 +141,9 @@ public class PS3TestDriver {
 
     private void createGraph(String graphName) {
         // Insert your code here.
-
-        // graphs.put(graphName, ___);
-        // output.println(...);
+    	
+		graphs.put(graphName,new Graph<WeightedNode>()); 
+        output.println("created graph " + graphName);
     }
 
     private void createNode(List<String> arguments) {
@@ -158,9 +159,10 @@ public class PS3TestDriver {
 
     private void createNode(String nodeName, String cost) {
         // Insert your code here.
-
-        // nodes.put(nodeName, ___);
-        // output.println(...);
+    	
+    	int costValue = Integer.valueOf(cost);
+    	nodes.put(nodeName, new WeightedNode(nodeName, costValue));
+    	output.println("created node " + nodeName + " with cost " + cost);
     }
 
     private void addNode(List<String> arguments) {
@@ -176,10 +178,10 @@ public class PS3TestDriver {
 
     private void addNode(String graphName, String nodeName) {
         // Insert your code here.
-
-        // ___ = graphs.get(graphName);
-        // ___ = nodes.get(nodeName);
-        // output.println(...);
+    	Graph<WeightedNode> graph = graphs.get(graphName);
+        WeightedNode node = nodes.get(nodeName);
+        graph.addNode(node);
+        output.println("added node " + nodeName + " to " + graphName);
     }
 
     private void addEdge(List<String> arguments) {
@@ -197,10 +199,11 @@ public class PS3TestDriver {
     private void addEdge(String graphName, String parentName, String childName) {
         // Insert your code here.
 
-        // ___ = graphs.get(graphName);
-        // ___ = nodes.get(parentName);
-        // ___ = nodes.get(childName);
-        // output.println(...);
+    	Graph<WeightedNode> graph = graphs.get(graphName);
+    	WeightedNode parentNode = nodes.get(parentName);
+    	WeightedNode childNode = nodes.get(childName);
+    	graph.addEdge(parentNode, childNode);
+        output.println("added edge from " + parentName + " to "+ childName + " in " + graphName);
     }
 
 
@@ -215,9 +218,18 @@ public class PS3TestDriver {
 
     private void listNodes(String graphName) {
         // Insert your code here.
-
-        // ___ = graphs.get(graphName);
-        // output.println(...);
+        Graph<WeightedNode> graph = graphs.get(graphName);
+        if(graph.isEmpty())
+            output.println(graphName + " contains:");
+        else{
+            HashSet<WeightedNode> list =graph.listNodes();
+        	String listString = new String() ;
+        	for(int i=0;i < list.size();i++){
+        		WeightedNode temp = (WeightedNode)list.toArray()[i];
+        		listString = listString +" "+temp.name();
+        	}
+        	output.println(graphName + " contains:"+listString);
+        }
     }
 
     private void listChildren(List<String> arguments) {
@@ -233,9 +245,20 @@ public class PS3TestDriver {
     private void listChildren(String graphName, String parentName) {
         // Insert your code here.
 
-        // ___ = graphs.get(graphName);
-        // ___ = nodes.get(parentName);
-        // output.println(...);
+    	Graph<WeightedNode> graph = graphs.get(graphName);
+    	WeightedNode parentNode = nodes.get(parentName);
+    	if(graph.listChildren(parentNode).isEmpty())
+            output.println("the children of " + parentName +" in "+ graphName +" are: ");
+    	else{
+            HashSet<WeightedNode> list =graph.listChildren(parentNode);
+        	String listString = new String() ;
+        	
+        	for(int i=0;i < list.size();i++){
+        		WeightedNode temp = (WeightedNode)list.toArray()[i];
+        		listString = listString + " " + temp.name();
+        	}
+        	output.println("the children of " + parentName +" in "+ graphName +" are:" + listString);
+    	}
     }
 
     private void findPath(List<String> arguments) {
@@ -248,7 +271,7 @@ public class PS3TestDriver {
         }
 
         Iterator<String> iter = arguments.iterator();
-
+        
         graphName = iter.next();
 
         while (iter.hasNext()) {
@@ -274,15 +297,31 @@ public class PS3TestDriver {
 
     private void findPath(String graphName, List<String> sourceArgs, List<String> destArgs) {
         // Insert your code here.
-
-        // ___ = graphs.get(graphName);
-        // ___ = nodes.get(sourceArgs.get(i));
-        // ___ = nodes.get(destArgs.get(i));
-        // ...
-        // DijkstraSpecializer specializer = new DijkstraSpecializer(...);
-        // Path p = PathFinder.findPath(specializer, ..., ...);
-        // output.println(...);
-
+    	Graph tempGraph = graphs.get(graphName);
+        List<Path<WeightedNode>> sourcelist = new ArrayList<Path<WeightedNode>>();
+        List<WeightedNode> destlist = new ArrayList<WeightedNode>();
+        for(int i=0; i < sourceArgs.size(); i++){
+            WeightedNode source = nodes.get(sourceArgs.get(i));
+            Path path = new WeightedNodePath(source);
+            sourcelist.add(path);
+        }
+        
+        for(int i=0; i < destArgs.size(); i++){
+            WeightedNode dest = nodes.get(destArgs.get(i));
+            destlist.add(dest);
+        }
+        
+        Dijkstra specializer = new Dijkstra(tempGraph);
+        Path p= PathFinder.findPath(specializer,sourcelist, destlist);
+        
+        
+        Iterator<WeightedNode> iter = p.iterator();
+        String s = new String();
+        while(iter.hasNext()){
+        	s= s + " " +iter.next().name;
+        }
+        output.print("shortest path in " + graphName + ":" + s);
+        
     }
 
     /**
@@ -296,7 +335,6 @@ public class PS3TestDriver {
         public CommandException(String s) {
             super(s);
         }
-
         public static final long serialVersionUID = 3495;
     }
 }

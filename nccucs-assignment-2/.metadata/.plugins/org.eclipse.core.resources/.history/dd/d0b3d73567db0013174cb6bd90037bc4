@@ -1,0 +1,254 @@
+package ps3.test;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.*;
+import static org.junit.Assert.*;
+
+import ps3.graph.Graph;
+import ps3.graph.WeightedNode;
+import junit.framework.TestCase;
+
+/**
+ * This class contains a set of test cases that can be used to test the
+ * implementation of the Graph class.
+ */
+public class GraphTest extends TestCase {
+
+    public GraphTest(String name) {
+        super(name);
+    }
+
+    /**
+     * Tests the constructor, but uses also the method nodes() to verify the
+     * construction.
+     */
+    @Before
+    public void testConstructor() {
+        // Create a new graph
+        Graph<WeightedNode> g = new Graph<WeightedNode>();
+        // The collection of nodes shouldn't be null
+/*        Assert.assertNotNull(g.nodes());
+        // The collection of nodes should be empty
+        assertEquals(g.nodes().isEmpty(), true);*/
+    }
+
+    /**
+     * Tests addNode(), but uses nodes() to verify the result.
+     */
+    public void testAddNode() {
+        Graph<WeightedNode> g1 = new Graph<WeightedNode>();
+        Graph<WeightedNode> g2 = new Graph<WeightedNode>();
+        WeightedNode n1 = new WeightedNode("n1", 1);
+        WeightedNode n2 = new WeightedNode("n2", 3);
+        WeightedNode n3 = new WeightedNode("n3", 5);
+        WeightedNode n1bis = new WeightedNode("n1", 1);
+
+        g1.addNode(n1);
+        // Test exceptions
+/*        try {
+            g1.addNode(null);
+            //fail();
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }*/
+
+     // Test if the graph has only n1 as node
+        Assert.assertEquals("n1", g1.listNodes());
+/*        assertEquals(g1.nodes().size(), 1);
+        assertTrue(g1.nodes().contains(n1));
+        // Verify that g2 is not changed
+        assertEquals(g2.nodes().size(), 0);
+
+        // Try to add the same node to the graph
+        g1.addNode(n1);
+        g1.addNode(n1bis);
+        assertEquals(g1.nodes().size(), 1);
+        assertTrue(g1.nodes().contains(n1));
+        assertTrue(g1.nodes().contains(n1bis));
+
+        // Add n2 to the graph
+        g1.addNode(n2);
+        assertEquals(g1.nodes().size(), 2);
+        assertTrue(g1.nodes().contains(n1));
+        assertTrue(g1.nodes().contains(n2));
+
+        // Add n3 to the graph
+        g1.addNode(n3);
+        assertEquals(g1.nodes().size(), 3);
+        assertTrue(g1.nodes().contains(n1));
+        assertTrue(g1.nodes().contains(n2));
+        assertTrue(g1.nodes().contains(n3));*/
+    }
+
+    /**
+     * Tests addEdge(), but uses children() to verify the result.
+     */
+    public void testAddEdge() {
+        Graph<WeightedNode> g1 = new Graph<WeightedNode>();
+        Graph<WeightedNode> g2 = new Graph<WeightedNode>();
+        WeightedNode n1 = new WeightedNode("n1", 1);
+        WeightedNode n2 = new WeightedNode("n2", 3);
+
+        // Add the nodes to g1 and to g2 and test exceptions
+        g1.addNode(n1);
+/*        try {
+            g1.addEdge(null, n1);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        try {
+            g1.addEdge(n1, null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        try {
+            g1.addEdge(n1, n2);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        try {
+            g1.addEdge(n2, n1);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }*/
+        g1.addNode(n2);
+        g2.addNode(n1);
+        g2.addNode(n2);
+
+        // Add an edge from n1 to n2 in g1
+        g1.addEdge(n1, n2);
+/*        assertTrue(g1.children(n1).contains(n2));
+        assertFalse(g1.children(n2).contains(n1));
+
+        // Test if it has an effect on g2
+        assertTrue(g2.children(n1).isEmpty());
+
+        // Try to add another edge from n1 to n2 in g1
+        g1.addEdge(n1, n2);
+        assertEquals(g1.children(n1).size(), 1);
+        assertTrue(g1.children(n1).contains(n2));
+        assertEquals(g1.children(n2).size(), 0);
+
+        // Add an edge from n1 to n1 in g1
+        g1.addEdge(n1, n1);
+        assertEquals(g1.children(n1).size(), 2);
+        assertTrue(g1.children(n1).contains(n1));
+        assertTrue(g1.children(n1).contains(n2));
+
+        // Add an edge in the other direction between n1 and n2 in g1
+        g1.addEdge(n2, n1);
+        assertEquals(g1.children(n2).size(), 1);
+        assertTrue(g1.children(n2).contains(n1));
+
+        // Add an edge from n2 to n2 in g2
+        g2.addEdge(n2, n2);
+        assertEquals(g2.children(n2).size(), 1);
+        assertTrue(g2.children(n2).contains(n2));
+        assertFalse(g1.children(n2).contains(n2));*/
+    }
+
+    /**
+     * Tests nodes(). This method is very similar to testAddNode(), because the
+     * two methods depend on each other to verify their results.
+     */
+    public void testNodes() {
+        Graph<WeightedNode> g1 = new Graph<WeightedNode>();
+        Graph<WeightedNode> g2 = new Graph<WeightedNode>();
+        WeightedNode n1 = new WeightedNode("n1", 1);
+        WeightedNode n2 = new WeightedNode("n2", 3);
+
+        // Test that the initial returned collection is not null and is empty
+        /*assertNotNull(g1.nodes());
+        assertTrue(g1.nodes().isEmpty());
+
+        // Test that only n1 is returned when added to g1
+        g1.addNode(n1);
+        assertEquals(g1.nodes().size(), 1);
+        assertTrue(g1.nodes().contains(n1));
+
+        // Test that g2 does not have n1
+        assertTrue(g2.nodes().isEmpty());
+
+        // Test that only n1 and n2 are returned
+        g1.addNode(n2);
+        assertEquals(g1.nodes().size(), 2);
+        assertTrue(g1.nodes().contains(n1));
+        assertTrue(g1.nodes().contains(n2));*/
+    }
+
+    public void testChildren() {
+        Graph<WeightedNode> g1 = new Graph<WeightedNode>();
+        Graph<WeightedNode> g2 = new Graph<WeightedNode>();
+        WeightedNode n1 = new WeightedNode("n1", 1);
+        WeightedNode n2 = new WeightedNode("n2", 3);
+
+        // Test exceptions
+/*        try {
+            g1.children(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        try {
+            g1.children(n1);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+
+        // Add n1 and n2 to g1 and g2
+        g1.addNode(n1);
+        g1.addNode(n2);
+        g2.addNode(n1);
+        g2.addNode(n2);
+
+        // Test that the children of every node in g1 are not null but are empty
+        assertNotNull(g1.children(n1));
+        assertNotNull(g1.children(n2));
+        assertTrue(g1.children(n1).isEmpty());
+        assertTrue(g1.children(n2).isEmpty());
+
+        // Add an edge from n1 to n2 in g1
+        g1.addEdge(n1, n2);
+        assertEquals(g1.children(n1).size(), 1);
+        assertTrue(g1.children(n1).contains(n2));
+        assertEquals(g1.children(n2).size(), 0);
+
+        // Try to add the same edge to g1
+        g1.addEdge(n1, n2);
+        assertEquals(g1.children(n1).size(), 1);
+        assertTrue(g1.children(n1).contains(n2));
+        assertEquals(g1.children(n2).size(), 0);
+
+        // Add an edge in the other direction in g1
+        g1.addEdge(n2, n1);
+        assertEquals(g1.children(n1).size(), 1);
+        assertTrue(g1.children(n1).contains(n2));
+        assertEquals(g1.children(n2).size(), 1);
+        assertTrue(g1.children(n2).contains(n1));
+
+        // Add an edge from n1 to itself in g1
+        g1.addEdge(n1, n1);
+        assertEquals(g1.children(n1).size(), 2);
+        assertTrue(g1.children(n1).contains(n1));
+        assertTrue(g1.children(n1).contains(n2));
+
+        // Try to reinsert a node to g1 and verify that its children remain the
+        // same, and that it remains as a children of nw2
+        g1.addNode(n1);
+        assertEquals(g1.children(n1).size(), 2);
+        assertTrue(g1.children(n1).contains(n1));
+        assertTrue(g1.children(n1).contains(n2));
+        assertEquals(g1.children(n2).size(), 1);
+        assertTrue(g1.children(n2).contains(n1));
+
+        // Test that g2 does not have the edges added to g1
+        assertTrue(g2.children(n1).isEmpty());
+        assertTrue(g2.children(n2).isEmpty());*/
+    }
+}
