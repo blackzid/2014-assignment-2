@@ -1,0 +1,2 @@
+I use Hashmap because Hashmap is from Abstractmap ,which is more like a graph than arraylist.
+And there are some method like get(Object key) in HashMap that is more useful than the method get(int index) in ArrayList.

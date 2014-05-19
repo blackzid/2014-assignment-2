@@ -1,0 +1,6 @@
+public Collection<N> listChildren: To get the list of children of a node in the graph.
+public Collection<N> listNodes: To get the list of Nodes in the graph.
+public void addNode: add node.
+public void addEdge: add edge.
+public Collection<N> listChildren:  To get the set of children of a node in the graph.
+public Collection<N> listNodes: To get the set of Nodes in the graph.
