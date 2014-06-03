@@ -1,6 +1,6 @@
-public Collection<N> listChildren: To get the list of children of a node in the graph.
-public Collection<N> listNodes: To get the list of Nodes in the graph.
-public void addNode: add node.
-public void addEdge: add edge.
-public Collection<N> listChildren:  To get the set of children of a node in the graph.
-public Collection<N> listNodes: To get the set of Nodes in the graph.
+
+Graph() : Constructor.
+public void addNode: 加入一個node
+public void addEdge: 為 node 建立連結
+public Collection<N> listChildren: 列出某個node所含的children ，方便我們知道node之間是否有連結關係
+public Collection<N> listNodes: To get the set of Nodes in the graph. 列出有哪些nodes在graph ， 讓我們知道有哪些node已經被加入

@@ -1,0 +1,8 @@
+1.About two or three hour if it includes implementation. About an hour in other problems.
+
+2.英文更好跟熟悉JAVA
+
+3.上面的時間是只代表專注在這個題目上的部份，不包括我去了解eclipse、Java等的時間，如果我在寫這作業前已經會基礎JAVA
+或是會用eclipse這個IDE我想我會輕鬆點。
+
+4.JAVA 跟 ECLIPSE。

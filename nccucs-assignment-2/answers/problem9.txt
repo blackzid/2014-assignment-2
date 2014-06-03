@@ -1,0 +1,2 @@
+WeightedNodePath 可以同時表達一個node的名稱與經過這個node的代價。如果使用arrayList，不能夠做動態新增的動作，
+就讓整個程式的效率降低。

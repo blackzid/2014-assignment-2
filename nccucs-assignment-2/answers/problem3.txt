@@ -19,5 +19,4 @@ AddEdge B n3 n4
 ListChildren B n2
 
 
-Create a graph that contains node n2, and node n2 has 2 path to arrive node n4.
-There are some other method to test function in graph.
+主要測試上面這些function功能是否正常且有沒有link錯誤的部份

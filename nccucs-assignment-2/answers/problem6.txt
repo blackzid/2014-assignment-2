@@ -1,0 +1,20 @@
+Q1:
+  т程祏隔畖琌璶т羆程ぶcost狦虫–Ω程costぃ玂靡羆琌程
+  EX:
+               P1
+               
+   cost2 n3-----------n5 cost2
+        /               \
+       /                 \
+    n1                    n6            
+       \                 /
+        \               /
+   cost1 n2-----------n4 cost5
+              
+               P2
+
+P1羆P2琌狦虫–Ω穦ǐ程穦匡P2
+
+
+Q2:
+  硂琌node-weighted ぃノ σ納traverse edges穦Τ基 

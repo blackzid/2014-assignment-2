@@ -1,7 +1,7 @@
-CreateGraph
-CreateNode
-AddNode
-AddEdge
-ListNodes
-ListChildren
-FindPath
+CreateGraph: Create a new graph
+CreateNode : Create a new node 
+AddNode: Add a new node into the graph
+AddEdge: Add a edge between two nodes into the graph
+ListNodes : Show all nodes in the graph
+ListChildren : Show the children of a node
+FindPath: Find shortest path between two node and show the path
